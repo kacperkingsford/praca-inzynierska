@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <a mat-button [routerLink]="'/'"><h1>MyHelp</h1></a>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/help-offers'"> Help offers </a>
+      <a mat-button [routerLink]="'/'"> Help requests </a>
+      <a mat-button [routerLink]="'/'"> About </a>
+      <a mat-button [routerLink]="'/'"> Contact </a>
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <span style="font-size: 12px;">MyHelp helps you easily find or give help</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+
+      <a mat-list-item [routerLink]="''"> Create help offer </a>
+      <a mat-list-item [routerLink]="''"> Create help request </a>
+      <a mat-list-item (click)="sidenav.toggle()" href="">Close</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

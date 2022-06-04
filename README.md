@@ -44,6 +44,8 @@ Application should start successfully on port 4200. Local address: http://localh
 ### Frontend
 
 ## Instruction for users
+Use cases: **[Figma Views](https://www.figma.com/file/4n3T8fkHtGwdw9QgxeiGnW/praca-in%C5%BCynierska?node-id=2%3A51)**
+
 
 ## Documantation for programmers
 
