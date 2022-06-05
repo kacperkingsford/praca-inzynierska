@@ -11,6 +11,10 @@
       <a mat-button [routerLink]="'/'"> About </a>
       <a mat-button [routerLink]="'/'"> Contact </a>
     </div>
+    <span class="example-spacer"></span>
+    <a mat-button [routerLink]="'/'"> Login </a>
+    <a mat-button [routerLink]="'/'"> Logout </a>
+    <a mat-button [routerLink]="'/sign-up'"> Sign Up </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row>
@@ -21,11 +25,9 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list>
-
       <a mat-list-item [routerLink]="''"> Create help offer </a>
       <a mat-list-item [routerLink]="''"> Create help request </a>
-      <a mat-list-item (click)="sidenav.toggle()" href="">Close</a>
-
+      <a mat-list-item (click)="sidenav.toggle()" >Close</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
