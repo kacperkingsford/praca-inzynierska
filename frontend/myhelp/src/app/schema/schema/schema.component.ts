@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../../service/authentication.service";
+import {MatDialog} from "@angular/material/dialog";
+import {LogoutDialogConfirmation} from "./logout-dialog/logout-dialog-confirmation.component";
 
 @Component({
   selector: 'app-schema',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SchemaComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authenticationService: AuthenticationService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.dialog.open(LogoutDialogConfirmation)
+  }
 }

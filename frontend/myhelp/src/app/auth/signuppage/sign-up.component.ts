@@ -11,9 +11,6 @@ import {FailedDialogComponent} from "./failed-dialog/failed-dialog.component";
 })
 export class SignUpComponent implements OnInit {
   hide = true;
-  days = Array.from({length: 31}, (_, i) => i + 1)
-  months = Array.from({length: 12}, (_, i) => i + 1)
-  years = Array.from({length: 100}, (_, i) => i + 1 + 1920)
 
   checkoutForm = this.formBuilder.group({
     username: '',

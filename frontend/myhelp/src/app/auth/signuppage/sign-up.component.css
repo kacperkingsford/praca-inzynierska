@@ -7,3 +7,10 @@ mat-grid-tile {
 .ml-2{margin-left: 2%;}
 .width-100{width: 100%;}
 .width-25{width: 25%;}
+
+.example-card {
+  max-width: 600px;
+  margin: auto;
+  width: 50%;
+  margin-top: 20px;
+}

@@ -28,7 +28,13 @@ import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 import { SuccessDialogComponent } from './auth/signuppage/success-dialog/success-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { FailedDialogComponent } from './auth/signuppage/failed-dialog/failed-dialog.component';
-
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {SuccessLoginDialogComponent} from "./auth/loginpage/success-dialog/success-login-dialog.component";
+import {FailedLoginDialogComponent} from "./auth/loginpage/failed-dialog/failed-login-dialog.component";
+import {LogoutDialogConfirmation} from "./schema/schema/logout-dialog/logout-dialog-confirmation.component";
+import { ProfileComponent } from './profile/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +44,11 @@ import { FailedDialogComponent } from './auth/signuppage/failed-dialog/failed-di
     LoginpageComponent,
     SignUpComponent,
     SuccessDialogComponent,
-    FailedDialogComponent
+    SuccessLoginDialogComponent,
+    FailedDialogComponent,
+    FailedLoginDialogComponent,
+    LogoutDialogConfirmation,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +71,10 @@ import { FailedDialogComponent } from './auth/signuppage/failed-dialog/failed-di
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},

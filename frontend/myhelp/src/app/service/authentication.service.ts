@@ -13,12 +13,26 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     // @ts-ignore
     return !this.jwtHelper.isTokenExpired(token);
   }
 
   signUp(userName: string, email: string, password: string): Observable<void> {
     return this.apiService.post(paths.signUp, {'username': userName, 'email': email, 'role': ['user'], 'password': password}, undefined);
+  }
+
+  login(userName: string, password: string): Observable<void> {
+    return this.apiService.post(paths.login, {'username': userName, 'password': password})
+  }
+
+  setJwtCookie(authToken: any) {
+    localStorage.setItem('accessToken', authToken.accessToken);
+  }
+
+  logout() {
+    console.log(localStorage.getItem("accessToken"))
+    localStorage.removeItem("accessToken");
+    console.log(localStorage.getItem("accessToken"))
   }
 }

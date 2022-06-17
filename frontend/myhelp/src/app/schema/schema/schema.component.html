@@ -12,9 +12,10 @@
       <a mat-button [routerLink]="'/'"> Contact </a>
     </div>
     <span class="example-spacer"></span>
-    <a mat-button [routerLink]="'/'"> Login </a>
-    <a mat-button [routerLink]="'/'"> Logout </a>
+    <a mat-button [routerLink]="'/login'" *ngIf="!authenticationService.isAuthenticated()"> Login </a>
+    <a mat-button (click)="logout()" *ngIf="authenticationService.isAuthenticated()"> Logout </a>
     <a mat-button [routerLink]="'/sign-up'"> Sign Up </a>
+    <a mat-button [routerLink]="'/profile'" *ngIf="authenticationService.isAuthenticated()"> Profile </a>
   </mat-toolbar-row>
 
   <mat-toolbar-row>

@@ -4,5 +4,6 @@ export const environment = {
 
 export const paths = {
   getAllHelpOffers: '/help-offer',
-  signUp: '/auth/signup'
+  signUp: '/auth/signup',
+  login: '/auth/signin'
 }
