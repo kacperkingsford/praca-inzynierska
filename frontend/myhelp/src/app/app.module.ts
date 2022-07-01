@@ -35,6 +35,7 @@ import {SuccessLoginDialogComponent} from "./auth/loginpage/success-dialog/succe
 import {FailedLoginDialogComponent} from "./auth/loginpage/failed-dialog/failed-login-dialog.component";
 import {LogoutDialogConfirmation} from "./schema/schema/logout-dialog/logout-dialog-confirmation.component";
 import { ProfileComponent } from './profile/profile/profile.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,32 +51,33 @@ import { ProfileComponent } from './profile/profile/profile.component';
     LogoutDialogConfirmation,
     ProfileComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSliderModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
-    FlexModule,
-    HttpClientModule,
-    MatOptionModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatRadioModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSliderModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        MatSidenavModule,
+        MatListModule,
+        MatCardModule,
+        FlexModule,
+        HttpClientModule,
+        MatOptionModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatGridListModule,
+        MatRadioModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSnackBarModule,
+        MatPaginatorModule
+    ],
   providers: [
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     JwtHelperService

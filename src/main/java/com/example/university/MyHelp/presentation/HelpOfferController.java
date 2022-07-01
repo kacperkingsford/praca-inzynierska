@@ -1,5 +1,6 @@
 package com.example.university.MyHelp.presentation;
 
+import com.example.university.MyHelp.constants.AppConstants;
 import com.example.university.MyHelp.persistance.HelpOfferEntity;
 import com.example.university.MyHelp.presentation.mapper.HelpOfferWithAddressMapper;
 import com.example.university.MyHelp.service.HelpOfferWithAddress;
@@ -28,9 +29,22 @@ public class HelpOfferController {
 		return HelpOfferWithAddressMapper.map(helpOfferEntity);
 	}
 
-	@GetMapping
+	@GetMapping("ee")
 	public List<HelpOfferWithAddress> getAllHelpOffers() {
 		return HelpOfferWithAddressMapper.map(helpOfferService.getAllHelpOffers());
+	}
+
+	@GetMapping
+	public List<HelpOfferWithAddress> getAllHelpOffers(@RequestParam(value = "pageNumber", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,
+	                                                   @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) int pageSize,
+	                                                   @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
+	                                                   @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir) {
+		return HelpOfferWithAddressMapper.map(helpOfferService.getAllHelpOffers(pageNo, pageSize, sortBy, sortDir));
+	}
+
+	@GetMapping("count")
+	public long countAllHelpOffers() {
+		return helpOfferService.countAllHelpOffers();
 	}
 
 //	@PostMapping
