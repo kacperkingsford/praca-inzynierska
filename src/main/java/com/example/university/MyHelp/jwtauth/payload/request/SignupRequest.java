@@ -1,5 +1,7 @@
 package com.example.university.MyHelp.jwtauth.payload.request;
 
+import com.example.university.MyHelp.jwtauth.annotations.CustomDateConstraint;
+import com.example.university.MyHelp.jwtauth.annotations.GenderValidation;
 import java.util.Set;
 
 import javax.validation.constraints.*;
@@ -10,9 +12,55 @@ public class SignupRequest {
   private String username;
 
   @NotBlank
+  @Pattern(regexp = "^[A-Z]{1}[a-z]{2,20}$")
+  private String name;
+
+  @NotBlank
+  @Pattern(regexp = "^[A-Z]{1}[a-z]{2,20}$")
+  private String surname;
+
+  @GenderValidation()
+  private String gender;
+
+  @NotBlank
   @Size(max = 50)
   @Email
   private String email;
+
+  public String getBirthDate() {
+    return birthDate;
+  }
+
+  public void setBirthDate(String birthDate) {
+    this.birthDate = birthDate;
+  }
+
+  @CustomDateConstraint
+  private String birthDate;
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getSurname() {
+    return surname;
+  }
+
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
 
   private Set<String> role;
 

@@ -1,11 +1,18 @@
 package com.example.university.MyHelp.jwtauth.models;
 
+import com.example.university.MyHelp.jwtauth.annotations.CustomDateConstraint;
+import com.example.university.MyHelp.jwtauth.annotations.GenderValidation;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -32,6 +39,62 @@ public class User {
   @Size(max = 120)
   private String password;
 
+  @Pattern(regexp = "^[A-Z]{1}[a-z]{1,20}$")
+  private String name;
+
+  public User(String username, String email, String password, String name, String surname, String gender, String birthDate) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.name = name;
+    this.surname = surname;
+    this.gender = gender;
+    this.birthDate = birthDate;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getSurname() {
+    return surname;
+  }
+
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  @NotBlank
+  @Pattern(regexp = "^[A-Z]{1}[a-z]{1,20}$")
+  private String surname;
+
+  @GenderValidation()
+  private String gender;
+
+  public String getBirthDate() {
+    return birthDate;
+  }
+
+  public void setBirthDate(String birthDate) {
+    this.birthDate = birthDate;
+  }
+
+  @Column(name = "birth_date")
+  @CustomDateConstraint
+  private String birthDate;
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles", 
         joinColumns = @JoinColumn(name = "user_id"), 
@@ -39,12 +102,6 @@ public class User {
   private Set<Role> roles = new HashSet<>();
 
   public User() {
-  }
-
-  public User(String username, String email, String password) {
-    this.username = username;
-    this.email = email;
-    this.password = password;
   }
 
   public Long getId() {
