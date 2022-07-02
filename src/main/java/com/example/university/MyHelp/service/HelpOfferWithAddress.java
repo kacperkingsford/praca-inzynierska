@@ -1,8 +1,9 @@
 package com.example.university.MyHelp.service;
 
 
-import java.util.Objects;
 
+
+import java.util.Objects;
 public class HelpOfferWithAddress {
 
 	private Long id;
@@ -58,22 +59,41 @@ public class HelpOfferWithAddress {
 	private String city;
 	private String street;
 
+	private Integer number;
+	private String postCode;
+	private String imagePath;
+	private String imageFileName;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		HelpOfferWithAddress that = (HelpOfferWithAddress) o;
-		return Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(city, that.city) && Objects.equals(street, that.street) && Objects.equals(number, that.number) && Objects.equals(postCode, that.postCode);
+		return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(city, that.city) && Objects.equals(street, that.street) && Objects.equals(number, that.number) && Objects.equals(postCode, that.postCode) && Objects.equals(imagePath, that.imagePath) && Objects.equals(imageFileName, that.imageFileName);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, description, city, street, number, postCode);
+		return Objects.hash(id, name, description, city, street, number, postCode, imagePath, imageFileName);
 	}
 
-	private Integer number;
-	private String postCode;
+	public String getImagePath() {
+		return imagePath;
+	}
 
+	public HelpOfferWithAddress setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+		return this;
+	}
+
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public HelpOfferWithAddress setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+		return this;
+	}
 
 	public String getDescription() {
 		return description;

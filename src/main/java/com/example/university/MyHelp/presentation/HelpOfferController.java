@@ -3,12 +3,15 @@ package com.example.university.MyHelp.presentation;
 import com.example.university.MyHelp.constants.AppConstants;
 import com.example.university.MyHelp.persistance.HelpOfferEntity;
 import com.example.university.MyHelp.presentation.mapper.HelpOfferWithAddressMapper;
+import com.example.university.MyHelp.service.CreateHelpOfferWithAddress;
 import com.example.university.MyHelp.service.HelpOfferWithAddress;
 import com.example.university.MyHelp.service.HelpOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -47,11 +50,29 @@ public class HelpOfferController {
 		return helpOfferService.countAllHelpOffers();
 	}
 
-//	@PostMapping
-//	public String createHelpOfferWithAddress(@RequestBody HelpOfferWithAddress helpOfferWithAddress) {
-//
-//		helpOfferService.createHelpOfferWithAddress()
-//	}
+	@PostMapping(
+			path = "",
+			consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE
+	)
+	public HelpOfferWithAddress createHelpOfferWithAddress(
+	    @RequestParam String description,
+        @RequestParam String city,
+		@RequestParam String street,
+		@RequestParam Integer number,
+		@RequestParam String postCode,
+		@RequestParam String name,
+	    @RequestParam MultipartFile file) {
+		return HelpOfferWithAddressMapper.map(helpOfferService.createHelpOffer(CreateHelpOfferWithAddress.builder()
+						.name(name)
+						.description(description)
+						.city(city)
+						.street(street)
+						.number(number)
+						.postCode(postCode)
+						.build()
+				, file));
+	}
 
 	@ExceptionHandler(value = NoSuchElementException.class)
 	@ResponseStatus(HttpStatus.CONFLICT)

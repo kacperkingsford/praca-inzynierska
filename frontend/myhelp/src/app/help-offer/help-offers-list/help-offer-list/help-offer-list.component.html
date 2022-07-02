@@ -10,7 +10,8 @@
         <mat-card-subtitle>
           Address: {{helpOffer.city}}, {{helpOffer.street}} {{helpOffer.number}}, {{helpOffer.postCode}}
         </mat-card-subtitle>
-        <img mat-card-image src="./assets/images/test-img.jpg">
+        <img mat-card-image
+             src="{{'https://myhelp.s3.amazonaws.com' + helpOffer.imagePath.substring(6) + '/' + helpOffer.imageFileName}}">
         <mat-card-content>
           <p>
             {{helpOffer.description}}

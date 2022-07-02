@@ -18,7 +18,9 @@ public class HelpOfferWithAddressMapper {
 				.setStreet(helpOfferEntity.getStreet())
 				.setNumber(helpOfferEntity.getNumer())
 				.setPostCode(helpOfferEntity.getPostCode())
-				.setCity(helpOfferEntity.getCity());
+				.setCity(helpOfferEntity.getCity())
+				.setImagePath(helpOfferEntity.getImagePath())
+				.setImageFileName(helpOfferEntity.getImageFileName());
 	}
 
 	public static List<HelpOfferWithAddress> map(List<HelpOfferEntity> helpOfferEntities) {

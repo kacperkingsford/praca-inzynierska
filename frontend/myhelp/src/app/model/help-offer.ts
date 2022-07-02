@@ -6,4 +6,6 @@ export interface HelpOffer {
   street: string;
   number: number;
   postCode: string;
+  imagePath: string;
+  imageFileName: string;
 }
