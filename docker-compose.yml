@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  myhelp:
+    build: .
+    secrets:
+      - source: myhelp-secrets
+        target: /usr/app/secrets.yml
+    depends_on:
+      myhelp_db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  myhelp_db:
+    image: mysql/mysql-server:8.0.27
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: myhelpuser
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: myhelp
+    ports:
+      - "3307:3306"
+
+  client:
+    build: frontend/myhelp
+    ports:
+      - '4200:4200'
+    volumes:
+      - /app/node_modules
+      - ./frontend/myhelp:/app #live reload angular client
+    depends_on:
+      - myhelp
+secrets:
+  myhelp-secrets:
+    file: ./secrets.yml
+
+    #TODO: communication without default network, use specific

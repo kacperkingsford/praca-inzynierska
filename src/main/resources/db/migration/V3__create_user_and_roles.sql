@@ -2,9 +2,9 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`
 (
     `id`       bigint(20) AUTO_INCREMENT,
-    `email`    varchar(255) NOT NULL,
+    `email`    varchar(255) NOT NULL UNIQUE,
     `password` varchar(255) NOT NULL,
-    `username` varchar(20) NOT NULL,
+    `username` varchar(20) NOT NULL UNIQUE ,
     `name` varchar(20) NOT NULL,
     `surname` varchar(20) NOT NULL,
     `gender` varchar(6) NOT NULL,

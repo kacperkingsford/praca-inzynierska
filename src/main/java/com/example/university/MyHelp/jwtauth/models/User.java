@@ -2,10 +2,6 @@ package com.example.university.MyHelp.jwtauth.models;
 
 import com.example.university.MyHelp.jwtauth.annotations.CustomDateConstraint;
 import com.example.university.MyHelp.jwtauth.annotations.GenderValidation;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 

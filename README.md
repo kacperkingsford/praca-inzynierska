@@ -1,48 +1,41 @@
 # MyHelp
 
+# Tasks todo:
+* Enable adding help offers/requests, and reserve them
+* On localhost use static images instead of AWS S3.
+* Use AWS RDS on production stage
+* CI/CD which will automatically deploy app to AWS ECS
+
 ## Hi!
 This web application will help foreigners in need.
 
-## Table of contents
-* [How to set up this app locally](#How-to-set-up-this-app-locally)
-* [How to run an app](#How-to-run-an-app)
-* [Instruction for users](#Instruction-for-users)
-* [Documantation for programmers](#Documantation-for-programmers)
-
 ## How to set up this app locally
-
-* [How to set up Database](#Database)
-* [How to set up Backend](#Backend)
-* [How to set up Frontend](#Frontend)
-
-### Database
-
-* Install MySQL
-* Create database called "myhelp"
-* Open .\src\main\resources\application.properties file
-* Replace spring.datasource.username and spring.datasource.password with your real credentials
-* Connect application to this database
-* Test your connection
-
-### Backend
-
-### Frontend
-
-In your project directory change directory into frontend project using
-```bash=
-cd frontend\myhelp\ 
+Create in root directory file `secrets.yml`:
 ```
-after this, start frontend application using
-```bash=
-ng serve
+spring:
+  datasource:
+    username: YOUR_DB_USER
+    password: YOUR_DB_PASSWORD
+
+flyway:
+  user: YOUR_DB_USER
+  password: YOUR_DB_PASSWORD
+
+myhelp:
+  app:
+    jwtSecret: YOUR_JWT_SECRET
+    jwtExpirationMs: YOUR_EXPIRATION_IN_MS
+  awsAccessKey: YOUR_AWS_ACCESS_KEY
+  awsSecretKey: YOUR_AWS_SECRET_KEY
 ```
-Application should start successfully on port 4200. Local address: http://localhost:4200
-## How to run an app
+fill `YOUR_*` with your credentials.
 
-### Backend
+In `docker-compose.yml` also change `MYSQL_ROOT_PASSWORD
+MYSQL_USER
+MYSQL_PASSWORD
+MYSQL_DATABASE` to your credentials.
 
-### Frontend
-
+Run `docker-compose up`.
 ## Instruction for users
 Use cases: **[Figma Views](https://www.figma.com/file/4n3T8fkHtGwdw9QgxeiGnW/praca-in%C5%BCynierska?node-id=2%3A51)**
 
@@ -63,3 +56,7 @@ Use cases: **[Figma Views](https://www.figma.com/file/4n3T8fkHtGwdw9QgxeiGnW/pra
 **Frontend**
 - TypeScript
 - Angular
+
+**Other**
+- Docker
+- AWS (S3, ECS, ECR (soon!))

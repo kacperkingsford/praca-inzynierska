@@ -9,3 +9,4 @@ build/
 */out/*
 aws_credentials.csv
 secrets.properties
+secrets.yml
