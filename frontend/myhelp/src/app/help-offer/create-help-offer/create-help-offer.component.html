@@ -1,0 +1,64 @@
+<mat-card class="example-card">
+  <mat-card-content>
+    <mat-card-title>Create help offer</mat-card-title>
+    <mat-card-subtitle>You should also upload image!</mat-card-subtitle>
+    <mat-grid-list cols="1" rowHeight="360px">
+      <mat-grid-tile>
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+          <div class="example-container">
+            <mat-form-field appearance="fill" class="width-100">
+              <mat-label>Description</mat-label>
+              <input id="description" formControlName="description" matInput>
+              <mat-error
+                *ngIf="checkoutForm.controls['description'].invalid && (checkoutForm.controls['description'].dirty || checkoutForm.controls['description'].touched)">{{"Invalid description! Should have 5 to 256 letters"}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-50">
+              <mat-label>City</mat-label>
+              <input id="city" formControlName="city" matInput>
+              <mat-error
+                *ngIf="checkoutForm.controls['city'].invalid && (checkoutForm.controls['city'].dirty || checkoutForm.controls['city'].touched)">{{"Invalid city format! Should start with capital letter and have 3 to 20 letters"}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-25 ml-1">
+              <mat-label>Street</mat-label>
+              <input id="street" formControlName="street" matInput>
+              <mat-error
+                *ngIf="checkoutForm.controls['street'].invalid && (checkoutForm.controls['street'].dirty || checkoutForm.controls['street'].touched)">{{"Invalid street format! Should start with capital letter and have 3 to 20 letters"}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-25 ml">
+              <mat-label>Number</mat-label>
+              <input id="number" formControlName="number" matInput>
+              <mat-error
+                *ngIf="checkoutForm.controls['number'].invalid && (checkoutForm.controls['number'].dirty || checkoutForm.controls['number'].touched)">{{"Invalid number format! Should be number with maximum 4 digits"}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-50">
+              <mat-label>Post code</mat-label>
+              <input id="postCode" formControlName="postCode" matInput>
+              <mat-error
+                *ngIf="checkoutForm.controls['postCode'].invalid && (checkoutForm.controls['postCode'].dirty || checkoutForm.controls['postCode'].touched)">{{"Invalid post code format!"}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width-50 ml-1">
+              <mat-label>Name</mat-label>
+              <input id="name" formControlName="name" matInput>
+              <mat-error
+                *ngIf="checkoutForm.controls['name'].invalid && (checkoutForm.controls['name'].dirty || checkoutForm.controls['name'].touched)">{{"Invalid name! Should have 5 to 256 letters"}}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="width-100">
+              <mat-label>File</mat-label>
+              <ngx-mat-file-input formControlName="file" placeholder="JPEG file only"
+                                  [accept]="'.jpeg'"></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+              <mat-error
+                *ngIf="checkoutForm.controls['file'].invalid && (checkoutForm.controls['file'].dirty || checkoutForm.controls['file'].touched)">{{"Invalid file format!!"}}</mat-error>
+            </mat-form-field>
+          </div>
+          <button style="margin-top: 10px" mat-raised-button color="primary" type="submit"
+                  [disabled]="checkoutForm.invalid">Submit
+          </button>
+        </form>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

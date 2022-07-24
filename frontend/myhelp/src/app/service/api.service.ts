@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -18,8 +18,8 @@ export class ApiService {
     return this.httpClient.get<T>(ApiService.apiBaseUrl + path, {params});
   }
 
-  post<T>(path: string, body: any, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.httpClient.post<T>(ApiService.apiBaseUrl + path, body, {params});
+  post<T>(path: string, body: any, params: HttpParams = new HttpParams(), headers = new HttpHeaders()): Observable<any> {
+    return this.httpClient.post<T>(ApiService.apiBaseUrl + path, body, {params: params, headers: headers});
   }
 
   patch<T>(path: string, body: any, params: HttpParams = new HttpParams()): Observable<any> {

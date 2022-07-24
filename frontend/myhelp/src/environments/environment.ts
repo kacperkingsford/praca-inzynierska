@@ -6,5 +6,6 @@ export const paths = {
   getAllHelpOffers: '/help-offer',
   countAllHelpOffers: '/help-offer/count',
   signUp: '/auth/signup',
-  login: '/auth/signin'
+  login: '/auth/signin',
+  createHelpOffer: '/help-offer'
 }

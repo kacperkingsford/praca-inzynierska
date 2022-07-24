@@ -13,12 +13,12 @@ export class SignUpComponent implements OnInit {
   hide = true;
 
   checkoutForm = this.formBuilder.group({
-    username: ['', [Validators.minLength(3), Validators.maxLength(20)]],
-    email: ['', [ Validators.email]],
-    password: ['', [ Validators.minLength(6), Validators.maxLength(40)]],
-    name: ['', [Validators.pattern("^[A-Z]{1}[a-z]{1,20}$")]],
-    surname: ['', [Validators.pattern("^[A-Z]{1}[a-z]{1,20}$")]],
-    gender: ['',[ Validators.required]],
+    username: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(20), Validators.required])],
+    email: ['', Validators.compose([Validators.email, Validators.required])],
+    password: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(40), Validators.required])],
+    name: ['', Validators.compose([Validators.pattern("^[A-Z]{1}[a-z]{1,20}$"), Validators.required])],
+    surname: ['', Validators.compose([Validators.pattern("^[A-Z]{1}[a-z]{1,20}$"), Validators.required])],
+    gender: ['',[Validators.required]],
     birthDate: ['', [Validators.required]]
   });
 
@@ -42,14 +42,22 @@ export class SignUpComponent implements OnInit {
         console.log('success!')
         console.log(value)
         this.openSuccessDialog();
+        this.clearForm()
       },
       error => {
         console.log('error')
         console.log(error)
         this.openErrorDialog();
+        this.clearForm();
       }
     )
+  }
+
+  clearForm() {
     this.checkoutForm.reset();
     this.checkoutForm.markAsUntouched();
+    Object.keys(this.checkoutForm.controls).forEach(key =>{
+      this.checkoutForm.controls[key].setErrors(null)
+    });
   }
 }

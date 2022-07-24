@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {SchemaComponent} from './schema/schema/schema.component';
@@ -25,17 +25,29 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
-import { SuccessDialogComponent } from './auth/signuppage/success-dialog/success-dialog.component';
+import {SuccessDialogComponent} from './auth/signuppage/success-dialog/success-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { FailedDialogComponent } from './auth/signuppage/failed-dialog/failed-dialog.component';
+import {FailedDialogComponent} from './auth/signuppage/failed-dialog/failed-dialog.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {SuccessLoginDialogComponent} from "./auth/loginpage/success-dialog/success-login-dialog.component";
 import {FailedLoginDialogComponent} from "./auth/loginpage/failed-dialog/failed-login-dialog.component";
 import {LogoutDialogConfirmation} from "./schema/schema/logout-dialog/logout-dialog-confirmation.component";
-import { ProfileComponent } from './profile/profile/profile.component';
+import {ProfileComponent} from './profile/profile/profile.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {CreateHelpOfferComponent} from './help-offer/create-help-offer/create-help-offer.component';
+import {MaterialFileInputModule} from "ngx-material-file-input";
+import {
+  SuccessCreateHelpOfferDialogComponent
+} from "./help-offer/create-help-offer/success-dialog/success-create-help-offer-dialog.component";
+import {
+  FailedCreateHelpOfferDialogComponent
+} from "./help-offer/create-help-offer/failed-dialog/failed-create-help-offer-dialog.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {SpinnerHttpInterceptor} from "./interceptor/http-interceptor";
+import {NgxSpinnerModule} from "ngx-spinner";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,38 +61,50 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     FailedDialogComponent,
     FailedLoginDialogComponent,
     LogoutDialogConfirmation,
-    ProfileComponent
+    ProfileComponent,
+    CreateHelpOfferComponent,
+    SuccessCreateHelpOfferDialogComponent,
+    FailedCreateHelpOfferDialogComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatSliderModule,
-        MatButtonModule,
-        BrowserAnimationsModule,
-        MatSidenavModule,
-        MatListModule,
-        MatCardModule,
-        FlexModule,
-        HttpClientModule,
-        MatOptionModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatGridListModule,
-        MatRadioModule,
-        MatInputModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSnackBarModule,
-        MatPaginatorModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSliderModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    FlexModule,
+    HttpClientModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatRadioModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MaterialFileInputModule,
+    MatProgressSpinnerModule,
+    NgxSpinnerModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
-    JwtHelperService
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerHttpInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

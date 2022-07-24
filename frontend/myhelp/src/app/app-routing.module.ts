@@ -6,6 +6,7 @@ import {SignUpComponent} from "./auth/signuppage/sign-up.component";
 import {LoginpageComponent} from "./auth/loginpage/loginpage.component";
 import {AuthGuardService} from "./service/auth-guard.service";
 import {ProfileComponent} from "./profile/profile/profile.component";
+import {CreateHelpOfferComponent} from "./help-offer/create-help-offer/create-help-offer.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'create-help-offer',
+    component: CreateHelpOfferComponent,
     canActivate: [AuthGuardService]
   }
 ];
