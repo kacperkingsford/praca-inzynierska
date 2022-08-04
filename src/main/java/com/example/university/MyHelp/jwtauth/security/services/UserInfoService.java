@@ -28,5 +28,6 @@ public class UserInfoService {
 				.setSigningKey(DatatypeConverter.parseBase64Binary(jwtSecret))
 				.parseClaimsJws(token).getBody();
 		return userRepository.findUserInfoByUsername(claims.getSubject());
+//				.map(user -> new UserInfo(userInfo.getUsername(), userInfo.getPassword()));
 	}
 }

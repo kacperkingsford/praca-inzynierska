@@ -3,6 +3,15 @@ import {HelpOfferService} from "../../../service/help-offer.service";
 import {HelpOffer} from "../../../model/help-offer";
 import {MatPaginator} from "@angular/material/paginator";
 import {switchMap} from "rxjs";
+import {SuccessLoginDialogComponent} from "../../../auth/loginpage/success-dialog/success-login-dialog.component";
+import {FailedLoginDialogComponent} from "../../../auth/loginpage/failed-dialog/failed-login-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  SuccessHelpOfferReservationDialogComponent
+} from "./success-dialog/success-help-offer-reservation-dialog.component";
+import {
+  FailedHelpOfferReservationDialogComponent
+} from "./failed-dialog/failed-help-offer-reservation-dialog.component";
 
 @Component({
   selector: 'app-help-offer-list',
@@ -16,7 +25,7 @@ export class HelpOfferListComponent implements OnInit {
   pageIndex = 0;
   helpOffers: HelpOffer[]
 
-  constructor(private helpOfferService: HelpOfferService) {
+  constructor(private helpOfferService: HelpOfferService, public dialog: MatDialog) {
   }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -34,6 +43,16 @@ export class HelpOfferListComponent implements OnInit {
     );
   }
 
+  openSuccessDialog() {
+    this.dialog.open(SuccessHelpOfferReservationDialogComponent, {
+      disableClose: true,
+    });
+  }
+
+  openErrorDialog() {
+    this.dialog.open(FailedHelpOfferReservationDialogComponent);
+  }
+
   ngAfterViewInit() {
     this.paginator.page.pipe(
       switchMap(() => {
@@ -45,4 +64,20 @@ export class HelpOfferListComponent implements OnInit {
       this.helpOffers = helpOffers
     })
   }
+
+  reserveHelpOffer(helpOfferId: number) {
+    this.helpOfferService.reserveHelpOffer(helpOfferId).subscribe(
+      (value) => {
+        console.log('successfully reserved!')
+        console.log(value)
+        this.openSuccessDialog();
+      },
+      error => {
+        console.log('error while reserving')
+        console.log(error)
+        // this.openErrorDialog();
+      }
+    );
+  }
+
 }

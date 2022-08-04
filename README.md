@@ -1,10 +1,12 @@
 # MyHelp
 
 # Tasks todo:
-* Enable adding help offers/requests, and reserve them
+* ~~Enable adding help offers/requests, and reserve them~~
+* Make mandatory for all endpoints (except login, signin) to use JWT token
 * On localhost use static images instead of AWS S3.
 * Use AWS RDS on production stage
 * CI/CD which will automatically deploy app to AWS ECS
+* Admin panel for managing all help offers - use in backend of role model
 
 ## Hi!
 This web application will help foreigners in need.

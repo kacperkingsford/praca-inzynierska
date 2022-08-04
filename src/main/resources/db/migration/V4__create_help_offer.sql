@@ -10,5 +10,8 @@ CREATE TABLE `help_offer`
     `post_code`       varchar(6)    NOT NULL,
     `image_path`      varchar(1024) NOT NULL,
     `image_file_name` varchar(128)  NOT NULL,
+    `created_by_user_id` bigint(20) NOT NULL,
+    `reserved_by_user_id` bigint(20) DEFAULT NULL,
+    FOREIGN KEY (created_by_user_id) REFERENCES users(id),
     PRIMARY KEY (`id`)
 );

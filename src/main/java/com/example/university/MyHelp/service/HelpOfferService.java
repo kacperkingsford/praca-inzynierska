@@ -2,6 +2,7 @@ package com.example.university.MyHelp.service;
 
 import com.example.university.MyHelp.aws.config.BucketName;
 import com.example.university.MyHelp.aws.service.FileStore;
+import com.example.university.MyHelp.jwtauth.security.services.UserDetailsImpl;
 import com.example.university.MyHelp.persistance.HelpOfferEntity;
 import com.example.university.MyHelp.persistance.repository.HelpOfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.webjars.NotFoundException;
@@ -24,6 +26,7 @@ public class HelpOfferService {
 	private final HelpOfferRepository helpOfferRepository;
 	@Autowired
 	private final FileStore fileStore;
+
 	public HelpOfferService(HelpOfferRepository helpOfferRepository, FileStore fileStore) {
 		this.helpOfferRepository = helpOfferRepository;
 		this.fileStore = fileStore;
@@ -46,6 +49,30 @@ public class HelpOfferService {
 		Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
 
 		Page<HelpOfferEntity> helpOfferEntityPage = helpOfferRepository.findAll(pageable);
+		return helpOfferEntityPage.getContent();
+	}
+
+	public List<HelpOfferEntity> getAllHelpOffersOwnedByExecutionUser(int pageNo, int pageSize, String sortBy, String sortDir) {
+		Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
+				: Sort.by(sortBy).descending();
+
+		Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+
+		UserDetailsImpl executionUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		Page<HelpOfferEntity> helpOfferEntityPage = helpOfferRepository.findAllByCreatedByUserId(executionUser.getId(), pageable);
+		return helpOfferEntityPage.getContent();
+	}
+
+	public List<HelpOfferEntity> getAllHelpOffersReservedByExecutionUser(int pageNo, int pageSize, String sortBy, String sortDir) {
+		Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
+				: Sort.by(sortBy).descending();
+
+		Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+
+		UserDetailsImpl executionUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		Page<HelpOfferEntity> helpOfferEntityPage = helpOfferRepository.findAllByReservedByUserId(executionUser.getId(), pageable);
 		return helpOfferEntityPage.getContent();
 	}
 
@@ -73,6 +100,8 @@ public class HelpOfferService {
 		} catch (IOException e) {
 			throw new IllegalStateException("Failed to upload file", e);
 		}
+		UserDetailsImpl principal = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 		HelpOfferEntity helpOfferEntity = new HelpOfferEntity()
 				.setName(helpOfferWithAddress.getName())
 				.setDescription(helpOfferWithAddress.getDescription())
@@ -81,9 +110,30 @@ public class HelpOfferService {
 				.setNumer(helpOfferWithAddress.getNumber())
 				.setPostCode(helpOfferWithAddress.getPostCode())
 				.setImagePath(path)
-				.setImageFileName(fileName);
+				.setImageFileName(fileName)
+				.setCreatedByUserId(principal.getId())
+				.setReservedByUserId(null);
 
 		long id = helpOfferRepository.saveAndFlush(helpOfferEntity).getId();
 		return helpOfferRepository.findById(id).orElseThrow(() -> new NotFoundException("Save failed"));
+	}
+
+	public long countAllHelpOffersByExecutionUser() {
+		UserDetailsImpl executionUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return helpOfferRepository.countByCreatedByUserId(executionUser.getId());
+	}
+
+	public long countAllHelpOffersReservedByExecutionUser() {
+		UserDetailsImpl executionUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return helpOfferRepository.countByReservedByUserId(executionUser.getId());
+	}
+
+	public void reserveHelpOffer(long id) {
+		HelpOfferEntity helpOffer = helpOfferRepository.findById(id).orElseThrow(() -> new NotFoundException("Save failed"));
+		if (helpOffer.getReservedByUserId() != null) {
+			throw new IllegalStateException("Cannot reserve a reserved help offer");
+		}
+		UserDetailsImpl executionUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		helpOfferRepository.reserveHelpOffer(executionUser.getId(), id);
 	}
 }

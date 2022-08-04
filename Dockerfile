@@ -18,7 +18,7 @@ FROM openjdk:17-oracle
 WORKDIR /usr/app
 
 
-CMD ["java",  "-Dspring.config.additional-location=./secrets.yml", "-classpath", "classes:resources:dependencies/*", "com/example/university/MyHelp/MyHelpApplication"]
+CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:5005" , "-Dspring.config.additional-location=./secrets.yml", "-classpath", "classes:resources:dependencies/*", "com/example/university/MyHelp/MyHelpApplication"]
 
 COPY --from=builder /usr/app/dependencies ./dependencies
 COPY --from=builder /usr/app/build/resources/main ./resources

@@ -7,6 +7,7 @@ import java.util.Objects;
 public class HelpOfferWithAddress {
 
 	private Long id;
+	private Long reservedByUserId;
 
 	public Long getId() {
 		return id;
@@ -64,19 +65,6 @@ public class HelpOfferWithAddress {
 	private String imagePath;
 	private String imageFileName;
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		HelpOfferWithAddress that = (HelpOfferWithAddress) o;
-		return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(city, that.city) && Objects.equals(street, that.street) && Objects.equals(number, that.number) && Objects.equals(postCode, that.postCode) && Objects.equals(imagePath, that.imagePath) && Objects.equals(imageFileName, that.imageFileName);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, name, description, city, street, number, postCode, imagePath, imageFileName);
-	}
-
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -109,6 +97,29 @@ public class HelpOfferWithAddress {
 	}
 	public HelpOfferWithAddress setName(String name) {
 		this.name = name;
+		return this;
+	}
+
+	public Long getReservedByUserId() {
+		return reservedByUserId;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		HelpOfferWithAddress that = (HelpOfferWithAddress) o;
+		return Objects.equals(id, that.id) && Objects.equals(reservedByUserId, that.reservedByUserId) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(city, that.city) && Objects.equals(street, that.street) && Objects.equals(number, that.number) && Objects.equals(postCode, that.postCode) && Objects.equals(imagePath, that.imagePath) && Objects.equals(imageFileName, that.imageFileName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, reservedByUserId, name, description, city, street, number, postCode, imagePath, imageFileName);
+	}
+
+	public HelpOfferWithAddress setReservedByUserId(Long reservedByUserId) {
+		this.reservedByUserId = reservedByUserId;
 		return this;
 	}
 }

@@ -1,0 +1,9 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.9"
+services:
+  myhelp:
+    command: "java -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005\
+      \ -Djava.security.egd=file:/dev/./urandom -Dspring.config.additional-location=./secrets.yml\
+      \ -classpath classes:resources:dependencies/* com/example/university/MyHelp/MyHelpApplication"
+    ports:
+    - "5005:5005"

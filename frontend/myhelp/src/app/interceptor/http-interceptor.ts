@@ -16,7 +16,10 @@ export class SpinnerHttpInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     this.spinnerService.show();
-
+    if(localStorage.getItem("accessToken") != null) {
+      req = this.addAccessTokenToRequest(req, localStorage.getItem("accessToken"))
+    }
+// TODO: handle unauthorized requests (401)
     return next.handle(req)
       .pipe(tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
@@ -25,5 +28,13 @@ export class SpinnerHttpInterceptor implements HttpInterceptor {
       }, (error) => {
         this.spinnerService.hide();
       }));
+  }
+
+  private addAccessTokenToRequest(request: HttpRequest<any>, token: string | null) {
+    return request.clone({
+      setHeaders: {
+        Authorization: 'Bearer ' + token
+      }
+    });
   }
 }

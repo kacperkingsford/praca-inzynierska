@@ -47,6 +47,13 @@ import {
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SpinnerHttpInterceptor} from "./interceptor/http-interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
+import {MatTableModule} from "@angular/material/table";
+import {
+  SuccessHelpOfferReservationDialogComponent
+} from "./help-offer/help-offers-list/help-offer-list/success-dialog/success-help-offer-reservation-dialog.component";
+import {
+  FailedHelpOfferReservationDialogComponent
+} from "./help-offer/help-offers-list/help-offer-list/failed-dialog/failed-help-offer-reservation-dialog.component";
 
 @NgModule({
   declarations: [
@@ -65,6 +72,8 @@ import {NgxSpinnerModule} from "ngx-spinner";
     CreateHelpOfferComponent,
     SuccessCreateHelpOfferDialogComponent,
     FailedCreateHelpOfferDialogComponent,
+    SuccessHelpOfferReservationDialogComponent,
+    FailedHelpOfferReservationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +103,8 @@ import {NgxSpinnerModule} from "ngx-spinner";
     MatPaginatorModule,
     MaterialFileInputModule,
     MatProgressSpinnerModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatTableModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

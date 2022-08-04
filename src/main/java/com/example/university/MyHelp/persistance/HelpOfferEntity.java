@@ -26,23 +26,46 @@ public class HelpOfferEntity {
 	@Column(name = "image_file_name")
 	private String imageFileName;
 
-	public HelpOfferEntity() {
+	@Column(name = "created_by_user_id")
+	private Long createdByUserId;
 
+	@Column(name = "reserved_by_user_id")
+	private Long reservedByUserId;
+
+	public Long getCreatedByUserId() {
+		return createdByUserId;
 	}
 
+	public HelpOfferEntity setCreatedByUserId(Long createdByUserId) {
+		this.createdByUserId = createdByUserId;
+		return this;
+	}
+	public Long getReservedByUserId() {
+		return reservedByUserId;
+	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		HelpOfferEntity that = (HelpOfferEntity) o;
-		return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(imagePath, that.imagePath) && Objects.equals(imageFileName, that.imageFileName) && Objects.equals(city, that.city) && Objects.equals(street, that.street) && Objects.equals(numer, that.numer) && Objects.equals(postCode, that.postCode);
+		return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(city, that.city) && Objects.equals(street, that.street) && Objects.equals(numer, that.numer) && Objects.equals(postCode, that.postCode) && Objects.equals(imagePath, that.imagePath) && Objects.equals(imageFileName, that.imageFileName) && Objects.equals(createdByUserId, that.createdByUserId) && Objects.equals(reservedByUserId, that.reservedByUserId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, description, imagePath, imageFileName, city, street, numer, postCode);
+		return Objects.hash(id, name, description, city, street, numer, postCode, imagePath, imageFileName, createdByUserId, reservedByUserId);
 	}
+
+	public HelpOfferEntity setReservedByUserId(Long reservedByUserId) {
+		this.reservedByUserId = reservedByUserId;
+		return this;
+	}
+
+	public HelpOfferEntity() {
+
+	}
+
 
 	public String getImagePath() {
 		return imagePath;

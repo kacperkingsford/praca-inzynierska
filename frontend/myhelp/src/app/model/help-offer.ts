@@ -8,4 +8,5 @@ export interface HelpOffer {
   postCode: string;
   imagePath: string;
   imageFileName: string;
+  reservedByUserId: number;
 }
