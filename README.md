@@ -1,12 +1,14 @@
 # MyHelp
-
+frontend repo: https://github.com/kacperkingsford/praca-inzynierska-frontend
 # Tasks todo:
 * ~~Enable adding help offers/requests, and reserve them~~
-* Make mandatory for all endpoints (except login, signin) to use JWT token
-* On localhost use static images instead of AWS S3.
+* ~~CI/CD which will automatically deploy app to AWS ECS - frontend~~
 * Use AWS RDS on production stage
-* CI/CD which will automatically deploy app to AWS ECS
+* CI/CD which will automatically deploy app to AWS ECS - backend
+* Make mandatory for all endpoints (except login, signin) to use JWT token
+* Translation to ukrainian using i18n
 * Admin panel for managing all help offers - use in backend of role model
+* On localhost use static images instead of AWS S3.
 
 ## Hi!
 This web application will help foreigners in need.
@@ -61,4 +63,4 @@ Use cases: **[Figma Views](https://www.figma.com/file/4n3T8fkHtGwdw9QgxeiGnW/pra
 
 **Other**
 - Docker
-- AWS (S3, ECS, ECR (soon!))
+- AWS (S3, ECS, ECR, Code Commit/Build/Pipeline)
