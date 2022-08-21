@@ -1,0 +1,68 @@
+<mat-card class="example-card">
+  <mat-card-content>
+  <mat-grid-list cols="1" rowHeight="550px">
+    <mat-grid-tile>
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="width-50" >
+            <mat-label>First Name</mat-label>
+            <input id="name" formControlName="name" matInput>
+            <mat-error *ngIf="checkoutForm.controls['name'].invalid && (checkoutForm.controls['name'].dirty || checkoutForm.controls['name'].touched)">{{"Invalid name format! Should start with capital letter and have 3 to 20 letters"}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="width-50 ml-2">
+            <mat-label>Surname</mat-label>
+            <input id="surname" formControlName="surname" matInput>
+            <mat-error *ngIf="checkoutForm.controls['surname'].invalid && (checkoutForm.controls['surname'].dirty || checkoutForm.controls['surname'].touched)">{{"Invalid surname format! Should start with capital letter and have 3 to 20 letters"}}</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Email address</mat-label>
+            <input id="email" formControlName="email" matInput placeholder="Ex. pat@example.com">
+            <mat-error *ngIf="checkoutForm.controls['email'].invalid && checkoutForm.controls['email'].touched">{{"Invalid email format!"}}</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Username</mat-label>
+            <input id="username" formControlName="username" matInput>
+            <mat-error *ngIf="checkoutForm.controls['username'].invalid && (checkoutForm.controls['username'].dirty || checkoutForm.controls['username'].touched)">{{"Invalid username format! Should have 3 to 20 characters"}}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Enter password</mat-label>
+            <input id="password" formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="checkoutForm.controls['password'].invalid && (checkoutForm.controls['password'].dirty || checkoutForm.controls['password'].touched)">{{"Invalid password format! Should have 6 to 40 characters"}}</mat-error>
+          </mat-form-field>
+          <br>
+          <label id="example-radio-group-label">Gender: </label>
+          <br><br>
+          <mat-radio-group aria-label="Select an option" id="gender" formControlName="gender">
+            <mat-radio-button value="MALE">Male</mat-radio-button>
+            <mat-radio-button class="example-radio-button" value="FEMALE">Female</mat-radio-button>
+            <mat-radio-button class="example-radio-button" value="OTHER">Other</mat-radio-button>
+            <mat-error *ngIf="checkoutForm.controls['gender'].invalid && (checkoutForm.controls['gender'].dirty || checkoutForm.controls['gender'].touched)">{{"Gender is required!"}}</mat-error>
+          </mat-radio-group>
+          <br><br>
+          <label id="example-radio-group-label">Date of birth: </label>
+          <br><br>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" id="birthDate" formControlName="birthDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="checkoutForm.controls['birthDate'].invalid && (checkoutForm.controls['birthDate'].dirty || checkoutForm.controls['birthDate'].touched)">{{"Birth date is required!"}}</mat-error>
+          </mat-form-field>
+
+        </div>
+        <button style="margin-top: 10px" mat-raised-button color="primary" type="submit" [disabled]="checkoutForm.invalid">Submit</button>
+      </form>
+    </mat-grid-tile>
+  </mat-grid-list>
+  </mat-card-content>
+</mat-card>

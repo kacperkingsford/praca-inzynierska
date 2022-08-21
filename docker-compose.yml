@@ -23,7 +23,9 @@ services:
       - "3307:3306"
 
   client:
-    build: frontend/myhelp
+    build:
+      context: frontend/myhelp
+      dockerfile: Dockerfile.dev
     ports:
       - '4200:4200'
     volumes:
