@@ -1,4 +1,4 @@
-FROM openjdk:17-oracle as builder
+FROM public.ecr.aws/docker/library/openjdk:17.0-oracle as builder
 WORKDIR /usr/app
 COPY ./gradle ./gradle
 
@@ -13,7 +13,7 @@ COPY ./src ./src
 
 RUN ./gradlew build
 
-FROM openjdk:17-oracle
+FROM public.ecr.aws/docker/library/openjdk:17.0-oracle
 WORKDIR /usr/app
 
 
