@@ -8,8 +8,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t web:1 .
-      - docker tag web:1 489073718747.dkr.ecr.us-east-1.amazonaws.com/myhelpbackend
+      - docker build -t backend:1 .
+      - docker tag backend:1 489073718747.dkr.ecr.us-east-1.amazonaws.com/myhelpbackend
   post_build:
     commands:
       - echo Build completed on `date`
