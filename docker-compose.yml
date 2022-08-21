@@ -2,7 +2,9 @@ version: "3.9"
 
 services:
   myhelp:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-local
     secrets:
       - source: myhelp-secrets
         target: /usr/app/secrets.yml
